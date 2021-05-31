@@ -4,6 +4,9 @@ import android.util.Log;
 
 public class Config {
 
+    public static final String TAG_SPLASH_SCREEN = "message_activity_splash_screen";
+    public static final String TAG_HOME_SCREEN   = "message_activity_home_screen";
+
     private static final boolean DEBUG_MODE = true;
 
     public static void LOG(String tag, String message, boolean error) {

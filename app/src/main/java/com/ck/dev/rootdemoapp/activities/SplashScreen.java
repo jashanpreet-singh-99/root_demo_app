@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.ck.dev.rootdemoapp.R;
+import com.ck.dev.rootdemoapp.utils.Config;
 
 public class SplashScreen extends Activity {
 
@@ -20,6 +21,7 @@ public class SplashScreen extends Activity {
     Contain View initiations.
      */
     private void initView() {
+        Config.LOG(Config.TAG_SPLASH_SCREEN, "Started Splash Activity.", false);
         // Delay the opening of the next activity by 1 second.
         new Handler().postDelayed(this::startNextActivity, 1000);
     } // initView
