@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/deep_black"
-    tools:context=".SplashScreen">
+    tools:context=".activities.SplashScreen">
 
     <RelativeLayout
         android:layout_width="match_parent"
