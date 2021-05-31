@@ -6,6 +6,7 @@ import android.widget.Button;
 
 import com.ck.dev.rootdemoapp.R;
 import com.ck.dev.rootdemoapp.utils.Config;
+import com.ck.dev.rootdemoapp.utils.RootExecutor;
 
 public class HomeScreen extends Activity {
 
@@ -28,7 +29,7 @@ public class HomeScreen extends Activity {
 
     private void onClick() {
         checkRootBtn.setOnClickListener( v -> {
-
+            RootExecutor.checkRoot();
         });
     } // onClick
 }
