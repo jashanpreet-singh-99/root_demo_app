@@ -11,7 +11,7 @@ public class Config {
     private static final boolean DEBUG_MODE = true;
 
     public static void LOG(String tag, String message, boolean error) {
-        if (DEBUG_MODE)
+        if (!DEBUG_MODE)
             return;
         if (error)
             Log.e(tag, message);
