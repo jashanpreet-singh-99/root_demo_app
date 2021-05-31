@@ -6,6 +6,10 @@ import java.io.IOException;
 
 public abstract class RootExecutor {
 
+    /*
+    Check whether the device has root permission or not.
+    the function will return false if the user denied the access.
+     */
     public static boolean checkRoot() {
         boolean returnVal = false;
         Process suProcess;
