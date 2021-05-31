@@ -6,6 +6,7 @@ public class Config {
 
     public static final String TAG_SPLASH_SCREEN = "message_activity_splash_screen";
     public static final String TAG_HOME_SCREEN   = "message_activity_home_screen";
+    public static final String TAG_ROOT_EXECUTOR = "message_root_executor";
 
     private static final boolean DEBUG_MODE = true;
 
