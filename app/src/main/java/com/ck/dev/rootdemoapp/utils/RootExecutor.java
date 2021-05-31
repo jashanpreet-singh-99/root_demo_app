@@ -3,6 +3,7 @@ package com.ck.dev.rootdemoapp.utils;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public abstract class RootExecutor {
 
@@ -50,4 +51,33 @@ public abstract class RootExecutor {
         return returnVal;
     } // checkRoot
 
+    public final boolean execute() {
+        boolean returnVal = false;
+        try {
+            ArrayList<String> commands = getCommandsToExecute();
+            if (commands != null && commands.size() > 0) {
+                Process suProcess = Runtime.getRuntime().exec("su");
+
+                DataOutputStream outputStream = new DataOutputStream(suProcess.getOutputStream());
+
+                for (String command: commands) {
+                    outputStream.writeBytes(command + "\n");
+                    outputStream.flush();
+                }
+                outputStream.writeBytes("exit\n");
+                outputStream.flush();
+
+                try {
+                    returnVal = suProcess.waitFor() != 255;
+                } catch (InterruptedException e) {
+                    Config.LOG(Config.TAG_ROOT_EXECUTOR, " Error while executing command in Root mode : " + e.getMessage(), true);
+                }
+            }
+        } catch (IOException e) {
+            Config.LOG(Config.TAG_ROOT_EXECUTOR, " Error while getting Root access : " + e.getMessage(), true);
+        }
+        return returnVal;
+    } // execute
+
+    protected abstract ArrayList<String> getCommandsToExecute();
 }
