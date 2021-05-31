@@ -51,6 +51,11 @@ public abstract class RootExecutor {
         return returnVal;
     } // checkRoot
 
+    /*
+    Helps to run commands in the root mode.
+    The commands are passed in form of an array of strings.
+    The function returns true if the commands executed successfully.
+     */
     public final boolean execute() {
         boolean returnVal = false;
         try {
