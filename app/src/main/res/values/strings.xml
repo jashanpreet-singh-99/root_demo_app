@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Root Demo App</string>
+    <string name="app_icon">Application icon</string>
 </resources>
