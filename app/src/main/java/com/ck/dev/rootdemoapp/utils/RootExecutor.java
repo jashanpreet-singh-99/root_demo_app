@@ -20,7 +20,6 @@ public abstract class RootExecutor {
 
             DataOutputStream outputStream = new DataOutputStream(suProcess.getOutputStream());
             DataInputStream inputStream   = new DataInputStream(suProcess.getInputStream());
-
             if (outputStream != null && inputStream != null) {
                 outputStream.writeBytes("id\n");
                 outputStream.flush();
@@ -43,6 +42,8 @@ public abstract class RootExecutor {
                     outputStream.writeBytes("exit/n");
                     outputStream.flush();
                 }
+            } else {
+                Config.LOG(Config.TAG_ROOT_EXECUTOR, " suProcess Stream empty.", true);
             }
         } catch (IOException e) {
             returnVal = false;

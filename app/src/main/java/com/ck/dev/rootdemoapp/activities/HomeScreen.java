@@ -29,7 +29,7 @@ public class HomeScreen extends Activity {
 
     private void onClick() {
         checkRootBtn.setOnClickListener( v -> {
-            RootExecutor.checkRoot();
+            Config.LOG(Config.TAG_HOME_SCREEN, "Root check called : " + RootExecutor.checkRoot(), true);
         });
     } // onClick
 }
