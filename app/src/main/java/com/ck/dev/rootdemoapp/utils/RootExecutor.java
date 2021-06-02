@@ -42,6 +42,8 @@ public abstract class RootExecutor {
                 outputStream.writeBytes("exit/n");
                 outputStream.flush();
             }
+            outputStream.close();
+            inputStream.close();
         } catch (IOException e) {
             returnVal = false;
             Config.LOG(Config.TAG_ROOT_EXECUTOR, " Error while getting Root access : " + e.getMessage(), true);
