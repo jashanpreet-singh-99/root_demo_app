@@ -3,6 +3,8 @@ package com.ck.dev.rootdemoapp.activities;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.ck.dev.rootdemoapp.R;
 import com.ck.dev.rootdemoapp.utils.Config;
@@ -10,7 +12,11 @@ import com.ck.dev.rootdemoapp.utils.RootExecutor;
 
 public class HomeScreen extends Activity {
 
-    private Button checkRootBtn;
+    private Button   checkRootBtn;
+    private Button   executeCommandBtn;
+    private EditText commandTxtView;
+    private TextView outputTxtView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +28,10 @@ public class HomeScreen extends Activity {
     private void initView() {
         Config.LOG(Config.TAG_HOME_SCREEN, "Started Home Activity.", false);
 
-        checkRootBtn = this.findViewById(R.id.check_root_btn);
+        checkRootBtn         = this.findViewById(R.id.check_root_btn);
+        executeCommandBtn    = this.findViewById(R.id.execute_command_btn);
+        commandTxtView       = this.findViewById(R.id.command_txt_view);
+        outputTxtView        = this.findViewById(R.id.output_txt_view);
 
         onClick();
     } // initView
@@ -30,6 +39,10 @@ public class HomeScreen extends Activity {
     private void onClick() {
         checkRootBtn.setOnClickListener( v -> {
             Config.LOG(Config.TAG_HOME_SCREEN, "Root check called : " + RootExecutor.checkRoot(), true);
+        });
+
+        executeCommandBtn.setOnClickListener( v -> {
+
         });
     } // onClick
 }
