@@ -2,6 +2,7 @@ package com.ck.dev.rootdemoapp.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -36,6 +37,8 @@ public class HomeScreen extends Activity {
         executeCommandBtn    = this.findViewById(R.id.execute_command_btn);
         commandTxtView       = this.findViewById(R.id.command_txt_view);
         outputTxtView        = this.findViewById(R.id.output_txt_view);
+
+        outputTxtView.setMovementMethod(new ScrollingMovementMethod());
 
         onClick();
     } // initView

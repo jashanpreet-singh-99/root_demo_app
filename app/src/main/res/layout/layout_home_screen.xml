@@ -82,6 +82,7 @@
         android:paddingTop="12dp"
         android:paddingBottom="12dp"
         android:layout_margin="20dp"
+        android:scrollbars = "vertical"
         android:background="@drawable/rounded_bordered_20"/>
 
 
