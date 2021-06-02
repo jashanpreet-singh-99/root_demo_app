@@ -51,10 +51,10 @@ public class HomeScreen extends Activity {
                 return;
             }
 
-            //ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s+")));
-            ArrayList<String> commands = new ArrayList<>();
-            commands.add("ls -a");
-            Config.LOG(Config.TAG_HOME_SCREEN, "Executed Command : " + RootExecutor.execute(commands), true);
+            ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s+")));
+            String output = RootExecutor.execute(commands);
+            Config.LOG(Config.TAG_HOME_SCREEN, "Executed Command : " + output, true);
+            outputTxtView.setText(output);
         });
     } // onClick
 }
