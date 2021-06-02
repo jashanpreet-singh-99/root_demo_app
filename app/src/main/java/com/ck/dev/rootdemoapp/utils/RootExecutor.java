@@ -57,10 +57,9 @@ public abstract class RootExecutor {
     The commands are passed in form of an array of strings.
     The function returns true if the commands executed successfully.
      */
-    public final boolean execute() {
+    public static boolean execute(ArrayList<String> commands) {
         boolean returnVal = false;
         try {
-            ArrayList<String> commands = getCommandsToExecute();
             if (commands != null && commands.size() > 0) {
                 Process suProcess = Runtime.getRuntime().exec("su");
 
@@ -85,5 +84,4 @@ public abstract class RootExecutor {
         return returnVal;
     } // execute
 
-    protected abstract ArrayList<String> getCommandsToExecute();
 }

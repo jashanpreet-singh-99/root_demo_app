@@ -11,6 +11,9 @@ import com.ck.dev.rootdemoapp.R;
 import com.ck.dev.rootdemoapp.utils.Config;
 import com.ck.dev.rootdemoapp.utils.RootExecutor;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class HomeScreen extends Activity {
 
     private Button   checkRootBtn;
@@ -38,9 +41,7 @@ public class HomeScreen extends Activity {
     } // initView
 
     private void onClick() {
-        checkRootBtn.setOnClickListener( v -> {
-            Config.LOG(Config.TAG_HOME_SCREEN, "Root check called : " + RootExecutor.checkRoot(), true);
-        });
+        checkRootBtn.setOnClickListener( v -> Config.LOG(Config.TAG_HOME_SCREEN, "Root check called : " + RootExecutor.checkRoot(), true));
 
         executeCommandBtn.setOnClickListener( v -> {
             String command = commandTxtView.getText().toString();
@@ -49,6 +50,9 @@ public class HomeScreen extends Activity {
                 Config.LOG(Config.TAG_HOME_SCREEN, "No command in CommandTxtView.", true);
                 return;
             }
+
+            ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s+")));
+            Config.LOG(Config.TAG_HOME_SCREEN, "Executed Command : " + RootExecutor.execute(commands), true);
         });
     } // onClick
 }
