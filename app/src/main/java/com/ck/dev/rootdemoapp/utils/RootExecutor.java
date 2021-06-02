@@ -55,33 +55,45 @@ public abstract class RootExecutor {
     /*
     Helps to run commands in the root mode.
     The commands are passed in form of an array of strings.
-    The function returns true if the commands executed successfully.
+    This function return the output of the command executed.
      */
-    public static boolean execute(ArrayList<String> commands) {
-        boolean returnVal = false;
+    public static String execute(ArrayList<String> commands) {
         try {
             if (commands != null && commands.size() > 0) {
                 Process suProcess = Runtime.getRuntime().exec("su");
 
                 DataOutputStream outputStream = new DataOutputStream(suProcess.getOutputStream());
+                DataInputStream inputStream   = new DataInputStream(suProcess.getInputStream());
 
                 for (String command: commands) {
                     outputStream.writeBytes(command + "\n");
                     outputStream.flush();
                 }
+                //String data = readDataFromStream(inputStream);
+                String data = inputStream.readLine();
                 outputStream.writeBytes("exit\n");
                 outputStream.flush();
 
-                try {
-                    returnVal = suProcess.waitFor() != 255;
-                } catch (InterruptedException e) {
-                    Config.LOG(Config.TAG_ROOT_EXECUTOR, " Error while executing command in Root mode : " + e.getMessage(), true);
-                }
+                return data;
             }
+            return "Unknown Command.";
         } catch (IOException e) {
             Config.LOG(Config.TAG_ROOT_EXECUTOR, " Error while getting Root access : " + e.getMessage(), true);
+            return "Error : " + e.getMessage();
         }
-        return returnVal;
     } // execute
+
+    private static String readDataFromStream(DataInputStream inputStream) {
+        try {
+            int count = inputStream.available();
+            byte[] byteArray = new byte[count];
+            int bytes = inputStream.read(byteArray);
+            Config.LOG(Config.TAG_ROOT_EXECUTOR, "Bytes read from Steam : " + bytes, false);
+            return new String(byteArray);
+        } catch (IOException e) {
+            Config.LOG(Config.TAG_ROOT_EXECUTOR, "Error while reading stream : " + e.getMessage(), false);
+            return "Error in reading data.";
+        }
+    }
 
 }

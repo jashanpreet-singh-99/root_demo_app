@@ -51,7 +51,9 @@ public class HomeScreen extends Activity {
                 return;
             }
 
-            ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s+")));
+            //ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split("\\s+")));
+            ArrayList<String> commands = new ArrayList<>();
+            commands.add("ls -a");
             Config.LOG(Config.TAG_HOME_SCREEN, "Executed Command : " + RootExecutor.execute(commands), true);
         });
     } // onClick
