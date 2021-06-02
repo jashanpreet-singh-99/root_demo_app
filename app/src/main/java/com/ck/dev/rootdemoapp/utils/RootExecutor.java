@@ -1,7 +1,6 @@
 package com.ck.dev.rootdemoapp.utils;
 
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,7 +13,7 @@ public abstract class RootExecutor {
     the function will return false if the user denied the access.
      */
     public static boolean checkRoot() {
-        boolean returnVal = false;
+        boolean returnVal;
         Process suProcess;
 
         try {
@@ -22,30 +21,26 @@ public abstract class RootExecutor {
 
             DataOutputStream outputStream = new DataOutputStream(suProcess.getOutputStream());
             BufferedReader inputStream   = new BufferedReader(new InputStreamReader(suProcess.getInputStream()));
-            if (outputStream != null && inputStream != null) {
-                outputStream.writeBytes("id\n");
-                outputStream.flush();
+            outputStream.writeBytes("id\n");
+            outputStream.flush();
 
-                String currentUid = inputStream.readLine();
-                boolean exitSU = false;
+            String currentUid = inputStream.readLine();
+            boolean exitSU = false;
 
-                if (currentUid == null) {
-                    returnVal = false;
+            if (currentUid == null) {
+                returnVal = false;
                     Config.LOG(Config.TAG_ROOT_EXECUTOR, " Unable to get Root access.", true);
-                } else if (currentUid.contains("uid=0")) {
+            } else if (currentUid.contains("uid=0")) {
                     returnVal = true;
                     Config.LOG(Config.TAG_ROOT_EXECUTOR, " Root access GRANTED.", false);
-                } else {
-                    returnVal = false;
-                    exitSU = true;
-                    Config.LOG(Config.TAG_ROOT_EXECUTOR, " Root permission denied.", true);
-                }
-                if (exitSU) {
-                    outputStream.writeBytes("exit/n");
-                    outputStream.flush();
-                }
             } else {
-                Config.LOG(Config.TAG_ROOT_EXECUTOR, " suProcess Stream empty.", true);
+                returnVal = false;
+                exitSU = true;
+                Config.LOG(Config.TAG_ROOT_EXECUTOR, " Root permission denied.", true);
+            }
+            if (exitSU) {
+                outputStream.writeBytes("exit/n");
+                outputStream.flush();
             }
         } catch (IOException e) {
             returnVal = false;
@@ -96,18 +91,15 @@ public abstract class RootExecutor {
     } // execute
 
     private static String readDataFromStream(BufferedReader bufferedReader) {
-        StringBuilder builder = new StringBuilder();
         try {
-            Config.LOG(Config.TAG_ROOT_EXECUTOR, "Reading data from steam.", false);
+            StringBuilder builder = new StringBuilder();
             String line;
             while ((line = bufferedReader.readLine()) != null && bufferedReader.ready()) {
                 Config.LOG(Config.TAG_ROOT_EXECUTOR, "Read : " + line + " : " + bufferedReader.ready(), false);
                 builder.append(line);
                 builder.append("\n");
             }
-            line = builder.toString();
-            Config.LOG(Config.TAG_ROOT_EXECUTOR, "Data read from Steam : ", false);
-            return line;
+            return builder.toString();
         } catch (IOException e) {
             Config.LOG(Config.TAG_ROOT_EXECUTOR, "Error while reading stream : " + e.getMessage(), false);
             return "Error in reading data.";
