@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ck.dev.rootdemoapp.R;
 import com.ck.dev.rootdemoapp.utils.Config;
@@ -42,7 +43,12 @@ public class HomeScreen extends Activity {
         });
 
         executeCommandBtn.setOnClickListener( v -> {
-
+            String command = commandTxtView.getText().toString();
+            if (command.isEmpty()) {
+                Toast.makeText(HomeScreen.this, "No command to execute.", Toast.LENGTH_SHORT).show();
+                Config.LOG(Config.TAG_HOME_SCREEN, "No command in CommandTxtView.", true);
+                return;
+            }
         });
     } // onClick
 }
